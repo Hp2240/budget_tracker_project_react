@@ -1,7 +1,7 @@
 import './styles/App.css'
 import { Route, Routes } from 'react-router'
-import { userEffect, useState } from 'react-router'
-import { checkSession } from './services/'
+import { useEffect, useState } from 'react'
+import { checkSession } from './services/Auth'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
@@ -18,7 +18,7 @@ function App() {
   }
 
   const checkToken = async () => {
-    const user = await checkSession
+    const user = await CheckSession()
   }
   return (
     <div className="App">
@@ -26,6 +26,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </main>
     </div>
