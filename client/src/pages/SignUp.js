@@ -1,8 +1,18 @@
-import { useState } from 'react'
+import { useDebugValue, useState } from 'react'
 import { SignUpUser } from '../services/Auth'
-import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
+  const [form, setForm] = useState({
+    userName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
   return (
     <div className="sign-up">
       <form className="user-container">
@@ -13,6 +23,7 @@ const SignUp = () => {
         <p>Don't have an account? Sign up here:</p>
         <div className="input-box">
           <input
+            onChange={handleChange}
             placeholder="User Name"
             type="userName"
             name="userName"
@@ -21,11 +32,18 @@ const SignUp = () => {
           <label htmlFor="userName">User Name</label>
         </div>
         <div className="input-box">
-          <input placeholder="Email" type="email" name="email" id="email" />
+          <input
+            onChange={handleChange}
+            placeholder="Email"
+            type="email"
+            name="email"
+            id="email"
+          />
           <label htmlFor="email">Email</label>
         </div>
         <div className="input-box">
           <input
+            onChange={handleChange}
             placeholder="Password"
             type="password"
             name="password"
@@ -33,6 +51,24 @@ const SignUp = () => {
           />
           <label htmlFor="password">Password</label>
         </div>
+        <div className="input-box">
+          <input
+            onChange={handleChange}
+            placeholder="confirmPassword"
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+          />
+          <label htmlFor="confirmPassword">Password</label>
+        </div>
+        <button
+          disabled={
+            !form.email ||
+            (!form.password && form.confirmPassword === form.password)
+          }
+        >
+          Sign Up
+        </button>
       </form>
     </div>
   )
