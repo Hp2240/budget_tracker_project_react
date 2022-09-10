@@ -41,7 +41,11 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar
+        authenticated={authenticated}
+        user={user}
+        handleSignOut={handleSignOut}
+      />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
