@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import { CheckSession } from './services/Auth'
 import SignIn from './pages/SignIn'
+import MyAccount from './pages/MyAccount'
 
 function App() {
   const [authenticated, toggleAuthenticated] = useState(false)
@@ -20,7 +21,24 @@ function App() {
 
   const checkToken = async () => {
     const user = await CheckSession()
+    const id = localStorage.getItem('id')
+    const email = localStorage.getItem('email')
+    setUser({
+      user,
+      id,
+      email
+    })
+    toggleAuthenticated(true)
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+
+    if (token) {
+      checkToken()
+    }
+  }, [])
+
   return (
     <div className="App">
       <Navbar />
@@ -28,7 +46,16 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route
+            path="/signin"
+            element={
+              <SignIn
+                setUser={setUser}
+                toggleAuthenticated={toggleAuthenticated}
+              />
+            }
+          />
+          <Route path="/account" element={<MyAccount />} />
         </Routes>
       </main>
     </div>
