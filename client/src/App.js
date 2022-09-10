@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import { CheckSession } from './services/Auth'
+import SignIn from './pages/SignIn'
 
 function App() {
   const [authenticated, toggleAuthenticated] = useState(false)
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
         </Routes>
       </main>
     </div>

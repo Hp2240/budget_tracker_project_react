@@ -1,5 +1,6 @@
-import { useDebugValue, useState } from 'react'
+import { useState } from 'react'
 import { SignUpUser } from '../services/Auth'
+import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -9,13 +10,32 @@ const SignUp = () => {
     confirmPassword: ''
   })
 
+  let navigate = useNavigate()
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log(form)
+    await SignUpUser({
+      userName: form.userName,
+      email: form.email,
+      password: form.password
+    })
+
+    setForm({
+      userName: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    })
+    navigate('/signin')
+  }
   return (
     <div className="sign-up">
-      <form className="user-container">
+      <form className="user-container" onSubmit={handleSubmit}>
         <h4>
           We are
           <span> BTTR</span>

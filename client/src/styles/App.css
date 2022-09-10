@@ -1,3 +1,22 @@
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background: #f3f2f2;
+}
+
+nav {
+  margin-right: 1em;
+  display: flex;
+}
+
+nav a {
+  text-decoration: none;
+}
 h4 {
   font-size: 24px;
   font-weight: 600;
@@ -41,4 +60,22 @@ input {
   position: relative;
   margin-bottom: 10px;
   width: 100%;
+}
+
+button {
+  -webkit-appearance: none;
+  width: auto;
+  min-width: 100px;
+  border-radius: 24px;
+  text-align: center;
+  padding: 15px 40px;
+  margin-top: 5px;
+  color: #fff;
+  font-size: 14px;
+  margin-left: auto;
+  font-weight: 500;
+  box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, .13);
+  border: none;
+  transition: all .3s ease;
+  outline: 0;
 }

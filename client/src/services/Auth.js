@@ -16,7 +16,7 @@ export const SignInUser = async (data) => {
 
 export const SignUpUser = async (data) => {
   try {
-    const res = await Client.post('api/auth/signup')
+    const res = await Client.post('/api/auth/signup', data)
     console.log(res.data)
     return res.data
   } catch (error) {
@@ -26,8 +26,8 @@ export const SignUpUser = async (data) => {
 
 export const CheckSession = async () => {
   try {
-    const res = await Client.get('api/auth/session')
-    console.log('this is the frontend check session')
+    const res = await Client.get('/api/auth/session')
+    console.log('this is the frontend check session', res)
     return res.data.token
   } catch (error) {
     throw error
