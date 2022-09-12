@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Client from '../services/api'
 import { GetAccounts } from '../services/Account'
 import CreateAccount from '../components/CreateAccount'
+import IncomeExpense from '../components/IncomeExpense'
 
 const MyAccount = ({ user, authenticated }) => {
   const [accounts, setAccounts] = useState([])
@@ -10,6 +11,7 @@ const MyAccount = ({ user, authenticated }) => {
   //   bankName: '',
   //   accountNumber: ''
   // })
+  const [trigger, setTrigger] = useState(false)
   let { id } = useParams()
 
   // const handleChange = (e) => {
@@ -38,17 +40,17 @@ const MyAccount = ({ user, authenticated }) => {
 
   return (
     <div className="container">
-      <button>
-        <CreateAccount />
-        Add Account
-      </button>
       {accounts.map((account) => (
         <div className="account-box">
-          <h3 className="account-name">Name: {account.User.userName}</h3>
-          <h3 className="account-name">Bank: {account.bankName}</h3>
-          <h3 className="account-name">Account #: {account.accountNumber}</h3>
+          <h3>Name: {account.User.userName}</h3>
+          <h3>Bank: {account.bankName}</h3>
+          <h3>Account #: {account.accountNumber}</h3>
+          <h4>Your Balance</h4>
+          <h2 id="balance">$0.00</h2>
         </div>
       ))}
+      <button onClick={() => setTrigger(true)}>Add Account</button>
+      {trigger ? <CreateAccount userId={user.id} /> : ''}
     </div>
   )
 }
