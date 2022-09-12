@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import img from '../image/logo2.png'
 
 const Navbar = ({ authenticated, user, handleSignOut }) => {
   let signedIn
@@ -6,7 +7,7 @@ const Navbar = ({ authenticated, user, handleSignOut }) => {
     signedIn = (
       <nav>
         <h5>Welcome {user.email}!</h5>
-        <Link to="/account">My Account</Link>
+        <Link to="/accounts/:id">My Account</Link>
         <Link onClick={handleSignOut} to="/">Sign Out</Link>
       </nav>
     )
@@ -22,7 +23,7 @@ const Navbar = ({ authenticated, user, handleSignOut }) => {
   return (
     <header>
       <Link to="/">
-        <img className="logo" src="./img/logo.png" />
+        <img className="logo" scr={img} />
       </Link>
       {authenticated && user ? signedIn : notSignedIn}
     </header>

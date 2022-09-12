@@ -8,6 +8,8 @@ import SignUp from './pages/SignUp'
 import { CheckSession } from './services/Auth'
 import SignIn from './pages/SignIn'
 import MyAccount from './pages/MyAccount'
+import img from './image/logo2.png'
+import { Link } from 'react-router-dom'
 
 function App() {
   const [authenticated, toggleAuthenticated] = useState(false)
@@ -39,6 +41,8 @@ function App() {
     }
   }, [])
 
+  console.log(user.id, 'this is user id')
+
   return (
     <div className="App">
       <Navbar
@@ -54,12 +58,16 @@ function App() {
             path="/signin"
             element={
               <SignIn
+                user={user}
                 setUser={setUser}
                 toggleAuthenticated={toggleAuthenticated}
               />
             }
           />
-          <Route path="/account" element={<MyAccount />} />
+          <Route
+            path="/accounts/:id"
+            element={<MyAccount user={user} authenticated={authenticated} />}
+          />
         </Routes>
       </main>
     </div>

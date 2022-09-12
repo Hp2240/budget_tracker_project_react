@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SignInUser } from '../services/Auth'
 import { useNavigate } from 'react-router-dom'
 
@@ -7,8 +7,11 @@ const SignIn = (props) => {
     email: '',
     password: ''
   })
+  const [userFound, setUserFound] = useState(false)
 
   let navigate = useNavigate()
+
+  // let { id } = useParams()
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -23,8 +26,18 @@ const SignIn = (props) => {
     })
     props.setUser(payload)
     props.toggleAuthenticated(true)
-    navigate('/account')
+    setUserFound(true)
+    // setUserId(props.user.id)
+    // console.log(userId, 'this is userId state')
   }
+
+  useEffect(() => {
+    if (userFound) {
+      let id = props.user.id
+      console.log(id)
+      navigate(`/accounts/${id}`)
+    }
+  }, [userFound])
   return (
     <div className="sign-in">
       <h4>Sign in</h4>
