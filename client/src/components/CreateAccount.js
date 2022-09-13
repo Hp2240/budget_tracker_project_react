@@ -19,6 +19,7 @@ const CreateAccount = ({ userId }) => {
       accountNumber: newAccount.accountNumber,
       userId: userId
     })
+    document.location.reload()
   }
   console.log(newAccount.bankName)
   console.log(newAccount.accountNumber)

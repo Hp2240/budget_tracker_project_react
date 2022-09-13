@@ -7,30 +7,11 @@ import IncomeExpense from '../components/IncomeExpense'
 
 const MyAccount = ({ user, authenticated }) => {
   const [accounts, setAccounts] = useState([])
-  // const [newAccount, setNewAccount] = useState({
-  //   bankName: '',
-  //   accountNumber: ''
-  // })
   const [trigger, setTrigger] = useState(false)
   let { id } = useParams()
 
-  // const handleChange = (e) => {
-  //   setNewAccount({ ...newAccount, [e.target.neme]: e.target.value })
-  // }
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
-  //   await Client.post('/api/accounts/', {
-  //     bankName: newAccount.bankName,
-  //     accountNumber: newAccount.accountNumber,
-  //     userId: user.id
-  //   })
-  //   document.location.reload()
-  // }
-
   useEffect(() => {
     const getAccountByUserId = async () => {
-      console.log('this is myAccount ', id)
       const res = await Client.get(`/api/accounts/${id}`)
       console.log(res.data, 'this is userId inside of account data')
       setAccounts(res.data)
@@ -40,16 +21,26 @@ const MyAccount = ({ user, authenticated }) => {
 
   return (
     <div className="container">
+      <button onClick={() => setTrigger(true)}>Add Account</button>
       {accounts.map((account) => (
-        <div className="account-box">
+        <div className="account-card">
           <h3>Name: {account.User.userName}</h3>
           <h3>Bank: {account.bankName}</h3>
           <h3>Account #: {account.accountNumber}</h3>
           <h4>Your Balance</h4>
           <h2 id="balance">$0.00</h2>
+          <button>Edit</button>
+          <button
+            onClick={async () => {
+              let deleted = parseInt(account.id)
+              await Client.delete(`/api/accounts/${deleted}`)
+              document.location.reload()
+            }}
+          >
+            Delete
+          </button>
         </div>
       ))}
-      <button onClick={() => setTrigger(true)}>Add Account</button>
       {trigger ? <CreateAccount userId={user.id} /> : ''}
     </div>
   )
