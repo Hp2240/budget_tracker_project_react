@@ -33,8 +33,6 @@ const MyAccount = ({ user, authenticated }) => {
           <div className="account-card" key={account.id}>
             <h3>{account.bankName}</h3>
             <h3>Account #: {account.accountNumber}</h3>
-            <h4>Your Balance</h4>
-            <h2 id="balance">$0.00</h2>
             <button
               onClick={() => {
                 setUpdateStatus(true)
