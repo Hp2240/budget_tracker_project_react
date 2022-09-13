@@ -87,11 +87,13 @@ input {
 }
 
 /* navBar */
+
 body,
 .nav,
 .menu {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav {

@@ -10,6 +10,7 @@ import SignIn from './pages/SignIn'
 import MyAccount from './pages/MyAccount'
 import img from './image/logo2.png'
 import { Link } from 'react-router-dom'
+import Transaction from './pages/Transaction'
 
 function App() {
   const [authenticated, toggleAuthenticated] = useState(false)
@@ -65,8 +66,12 @@ function App() {
             }
           />
           <Route
-            path="/accounts/:id"
+            path="/accounts/:userId"
             element={<MyAccount user={user} authenticated={authenticated} />}
+          />
+          <Route
+            path="/transactions/:id"
+            element={<Transaction user={user} />}
           />
         </Routes>
       </main>

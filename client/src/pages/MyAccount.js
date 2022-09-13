@@ -1,18 +1,40 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Client from '../services/api'
-import { GetAccounts } from '../services/Account'
 import CreateAccount from '../components/CreateAccount'
-import IncomeExpense from '../components/IncomeExpense'
 
 const MyAccount = ({ user, authenticated }) => {
   const [accounts, setAccounts] = useState([])
   const [trigger, setTrigger] = useState(false)
-  let { id } = useParams()
+  // const [updateAccount, setUpdateAccount] = useState({
+  //   bankName: '',
+  //   accountNumber: '',
+  //   id: ''
+  // })
+  // const [updateStatus, setUpdateStatus] = useState(false)
 
+  let { id } = useParams()
+  let navigate = useNavigate()
+
+  // const handleChangeUpdate = (e) => {
+  //   setUpdateAccount({ ...updateAccount, [e.target.name]: e.target.value })
+  // }
+
+  // const handleSubmitUpdate = async (e) => {
+  //   e.preventDefault()
+  //   await Client.put(`/api/accounts/${updateAccount.id}`, {
+  //     bankName: updateAccount.bankName,
+  //     accountNumber: updateAccount.accountNumber
+  //   })
+  //   document.location.reload()
+  // }
+
+  const viewTransaction = (accounts) => {
+    navigate(`/transactions/${accounts.id}`)
+  }
   useEffect(() => {
     const getAccountByUserId = async () => {
-      const res = await Client.get(`/api/accounts/${id}`)
+      const res = await Client.get(`/api/accounts/${user.id}`)
       console.log(res.data, 'this is userId inside of account data')
       setAccounts(res.data)
     }
@@ -29,7 +51,18 @@ const MyAccount = ({ user, authenticated }) => {
             <h3>Account #: {account.accountNumber}</h3>
             <h4>Your Balance</h4>
             <h2 id="balance">$0.00</h2>
-            <button>Edit</button>
+
+            <button
+            // onClick={() => {
+            //   setUpdateAccount(true)
+            //   setUpdateAccount({
+            //     bankName: account.bankName,
+            //     accountNumber: account.accountNumber
+            //   })
+            // }}
+            >
+              Edit
+            </button>
             <button
               onClick={async () => {
                 let deleted = parseInt(account.id)
@@ -39,10 +72,11 @@ const MyAccount = ({ user, authenticated }) => {
             >
               Delete
             </button>
+            <button onClick={() => viewTransaction(account)}>View</button>
           </div>
         ))}
-        {trigger ? <CreateAccount userId={user.id} /> : ''}
       </div>
+      {trigger ? <CreateAccount userId={user.id} /> : ''}
     </div>
   )
 }
