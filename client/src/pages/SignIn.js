@@ -62,7 +62,12 @@ const SignIn = (props) => {
           />
           <label htmlFor="password">Password</label>
         </div>
-        <button disabled={!form.email || !form.password}>Sign In</button>
+        <button
+          className="form-button"
+          disabled={!form.email || !form.password}
+        >
+          Sign In
+        </button>
       </form>
     </div>
   )

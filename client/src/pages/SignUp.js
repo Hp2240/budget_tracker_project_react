@@ -82,6 +82,7 @@ const SignUp = () => {
           <label htmlFor="confirmPassword">Password</label>
         </div>
         <button
+          className="form-button"
           disabled={
             !form.email ||
             (!form.password && form.confirmPassword === form.password)

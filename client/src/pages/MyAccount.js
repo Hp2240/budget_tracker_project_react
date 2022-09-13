@@ -20,28 +20,29 @@ const MyAccount = ({ user, authenticated }) => {
   }, [id])
 
   return (
-    <div className="container">
+    <div>
       <button onClick={() => setTrigger(true)}>Add Account</button>
-      {accounts.map((account) => (
-        <div className="account-card">
-          <h3>Name: {account.User.userName}</h3>
-          <h3>Bank: {account.bankName}</h3>
-          <h3>Account #: {account.accountNumber}</h3>
-          <h4>Your Balance</h4>
-          <h2 id="balance">$0.00</h2>
-          <button>Edit</button>
-          <button
-            onClick={async () => {
-              let deleted = parseInt(account.id)
-              await Client.delete(`/api/accounts/${deleted}`)
-              document.location.reload()
-            }}
-          >
-            Delete
-          </button>
-        </div>
-      ))}
-      {trigger ? <CreateAccount userId={user.id} /> : ''}
+      <div className="container">
+        {accounts.map((account) => (
+          <div className="account-card">
+            <h3>{account.bankName}</h3>
+            <h3>Account #: {account.accountNumber}</h3>
+            <h4>Your Balance</h4>
+            <h2 id="balance">$0.00</h2>
+            <button>Edit</button>
+            <button
+              onClick={async () => {
+                let deleted = parseInt(account.id)
+                await Client.delete(`/api/accounts/${deleted}`)
+                document.location.reload()
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+        {trigger ? <CreateAccount userId={user.id} /> : ''}
+      </div>
     </div>
   )
 }
