@@ -5,6 +5,7 @@ import IncomeExpense from '../components/IncomeExpense'
 
 const Transaction = () => {
   const [transactions, setTransactions] = useState([])
+  const [expense, setExpense] = useState('')
   let { id } = useParams()
 
   useEffect(() => {
@@ -16,18 +17,35 @@ const Transaction = () => {
     getTransaction()
   }, [id])
 
+  // balance = income - expense
+  const IncExp = transactions.map((transaction) => {
+    let balance = 0
+    if (transaction.type === 'expense') {
+      balance = balance - parseInt(transaction.amount)
+      return (
+        <li className="minus">
+          -${transaction.amount}
+          <button className="delete-btn">x</button>
+        </li>
+      )
+    } else if (transaction.type === 'income') {
+      balance = balance + parseInt(transaction.amount)
+      return (
+        <li className="plus">
+          +${transaction.amount}
+          <button className="delete-btn">x</button>
+        </li>
+      )
+    }
+  })
+
   return (
-    <div className="container">
+    <div cssName="container">
       <h4>Your Balance</h4>
       <h2 id="balance">$0.00</h2>
       <IncomeExpense />
       <h3>History</h3>
-      <ul className="list">
-        <li className="minus">
-          Cash <span>-$400</span>
-          <button className="delete-btn">x</button>
-        </li>
-      </ul>
+      <ul className="list">{IncExp}</ul>
     </div>
   )
 }
