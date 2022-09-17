@@ -5,7 +5,8 @@ import IncomeExpense from '../components/IncomeExpense'
 
 const Transaction = () => {
   const [transactions, setTransactions] = useState([])
-  const [expense, setExpense] = useState('')
+  let balance = 0
+  let [total, setTotal] = useState()
   let { id } = useParams()
 
   useEffect(() => {
@@ -13,25 +14,48 @@ const Transaction = () => {
       const res = await Client.get(`/api/transactions/${id}`)
       console.log(res.data, 'this is transactions')
       setTransactions(res.data)
+      for (let i = 0; i < res.data.length; i++) {
+        console.log(res.data[i].type)
+        if (res.data[i].type === 'expense') {
+          balance -= parseFloat(res.data[i].amount)
+        } else {
+          balance += parseFloat(res.data[i].amount)
+        }
+      }
+      setTotal(balance)
     }
     getTransaction()
   }, [id])
 
-  // balance = income - expense
+  // const calculateBalance = () => {
+  //   for (let i = 0; i < transactions.length; i++) {
+  //     transactions.map((transaction) => {
+  //       console.log(transaction, 'transactionnnnnn')
+  //       console.log(transaction.amount, 'amount')
+  //       let curAmt = parseFloat(transaction.amount)
+  //       console.log(curAmt, 'curAmt')
+  //       console.log(balance, 'balance inside loop')
+  //       if (transaction.type == 'expense') {
+  //         setBalance(balance - curAmt)
+  //       } else {
+  //         setBalance(balance + curAmt)
+  //       }
+  //     })
+  // //   }
+  //   console.log(balance, 'balance')
+  // }
+
   const IncExp = transactions.map((transaction) => {
-    let balance = 0
     if (transaction.type === 'expense') {
-      balance = balance - parseInt(transaction.amount)
       return (
-        <li className="minus">
+        <li className="minus" key={transaction.id}>
           -${transaction.amount}
           <button className="delete-btn">x</button>
         </li>
       )
     } else if (transaction.type === 'income') {
-      balance = balance + parseInt(transaction.amount)
       return (
-        <li className="plus">
+        <li className="plus" key={transaction.id}>
           +${transaction.amount}
           <button className="delete-btn">x</button>
         </li>
@@ -40,10 +64,10 @@ const Transaction = () => {
   })
 
   return (
-    <div cssName="container">
+    <div className="container">
       <h4>Your Balance</h4>
-      <h2 id="balance">$0.00</h2>
-      <IncomeExpense />
+      <h2 id="balance">${total}</h2>
+      <IncomeExpense transactions={transactions} />
       <h3>History</h3>
       <ul className="list">{IncExp}</ul>
     </div>

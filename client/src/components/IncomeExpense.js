@@ -1,4 +1,6 @@
-const IncomeExpense = () => {
+import { useState } from 'react'
+
+const IncomeExpense = ({ transactions }) => {
   return (
     <div className="inc-exp-container">
       <div>
