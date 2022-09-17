@@ -5,8 +5,9 @@ import IncomeExpense from '../components/IncomeExpense'
 
 const Transaction = () => {
   const [transactions, setTransactions] = useState([])
-  let balance = 0
-  let [total, setTotal] = useState()
+  let [total, setTotal] = useState(0)
+  let [expense, setExpense] = useState(0)
+  let [income, setIncome] = useState(0)
   let { id } = useParams()
 
   useEffect(() => {
@@ -14,17 +15,23 @@ const Transaction = () => {
       const res = await Client.get(`/api/transactions/${id}`)
       console.log(res.data, 'this is transactions')
       setTransactions(res.data)
+      let balance = 0
+      let exp = 0
+      let inc = 0
       for (let i = 0; i < res.data.length; i++) {
         console.log(res.data[i].type)
         if (res.data[i].type === 'expense') {
           balance -= parseFloat(res.data[i].amount)
+          exp += parseFloat(res.data[i].amount)
         } else {
           balance += parseFloat(res.data[i].amount)
+          inc += parseFloat(res.data[i].amount)
         }
       }
       setTotal(balance)
+      setExpense(exp)
+      setIncome(inc)
     }
-    console.log('dfdsfdsfsdfsdfsdf')
     getTransaction()
   }, [id])
 
@@ -50,7 +57,11 @@ const Transaction = () => {
     <div className="container">
       <h4>Your Balance</h4>
       <h2 id="balance">${total}</h2>
-      <IncomeExpense transactions={transactions} />
+      <IncomeExpense
+        transactions={transactions}
+        income={income}
+        expense={expense}
+      />
       <h3>History</h3>
       <ul className="list">{IncExp}</ul>
     </div>
