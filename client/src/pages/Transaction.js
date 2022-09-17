@@ -24,26 +24,9 @@ const Transaction = () => {
       }
       setTotal(balance)
     }
+    console.log('dfdsfdsfsdfsdfsdf')
     getTransaction()
   }, [id])
-
-  // const calculateBalance = () => {
-  //   for (let i = 0; i < transactions.length; i++) {
-  //     transactions.map((transaction) => {
-  //       console.log(transaction, 'transactionnnnnn')
-  //       console.log(transaction.amount, 'amount')
-  //       let curAmt = parseFloat(transaction.amount)
-  //       console.log(curAmt, 'curAmt')
-  //       console.log(balance, 'balance inside loop')
-  //       if (transaction.type == 'expense') {
-  //         setBalance(balance - curAmt)
-  //       } else {
-  //         setBalance(balance + curAmt)
-  //       }
-  //     })
-  // //   }
-  //   console.log(balance, 'balance')
-  // }
 
   const IncExp = transactions.map((transaction) => {
     if (transaction.type === 'expense') {
