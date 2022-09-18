@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 const IncomeExpense = ({ income, expense }) => {
   return (
     <div className="inc-exp-container">

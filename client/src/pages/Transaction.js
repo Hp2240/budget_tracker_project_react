@@ -2,24 +2,24 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Client from '../services/api'
 import IncomeExpense from '../components/IncomeExpense'
-
+import CreateIncExp from '../components/CreateIncExp'
 const Transaction = () => {
   const [transactions, setTransactions] = useState([])
   let [total, setTotal] = useState(0)
   let [expense, setExpense] = useState(0)
   let [income, setIncome] = useState(0)
+  let [accountId, setAccountId] = useState()
   let { id } = useParams()
 
   useEffect(() => {
     const getTransaction = async () => {
       const res = await Client.get(`/api/transactions/${id}`)
-      console.log(res.data, 'this is transactions')
+      setAccountId(id)
       setTransactions(res.data)
       let balance = 0
       let exp = 0
       let inc = 0
       for (let i = 0; i < res.data.length; i++) {
-        console.log(res.data[i].type)
         if (res.data[i].type === 'expense') {
           balance -= parseFloat(res.data[i].amount)
           exp += parseFloat(res.data[i].amount)
@@ -43,7 +43,7 @@ const Transaction = () => {
           <button className="delete-btn">x</button>
         </li>
       )
-    } else if (transaction.type === 'income') {
+    } else {
       return (
         <li className="plus" key={transaction.id}>
           +${transaction.amount}
@@ -64,6 +64,7 @@ const Transaction = () => {
       />
       <h3>History</h3>
       <ul className="list">{IncExp}</ul>
+      <CreateIncExp accountId={accountId} />
     </div>
   )
 }
