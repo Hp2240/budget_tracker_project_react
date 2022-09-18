@@ -50,14 +50,6 @@ const CreateAccount = ({ accountId }) => {
           </option>
         </select>
         <label htmlFor="type">type</label>
-        {/* <input
-          onChange={handleChange}
-          placeholder="transaction Number"
-          type="transactionNumber"
-          name="transactionNumber"
-          id="tansactionNumber"
-        />
-        <label htmlFor="bankName">Transaction Number</label> */}
         <input
           onChange={handleChange}
           placeholder="amount"
