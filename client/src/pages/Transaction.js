@@ -28,9 +28,9 @@ const Transaction = () => {
           inc += parseFloat(res.data[i].amount)
         }
       }
-      setTotal(balance)
-      setExpense(exp)
-      setIncome(inc)
+      setTotal(balance.toFixed(2))
+      setExpense(exp.toFixed(2))
+      setIncome(inc.toFixed(2))
     }
     getTransaction()
   }, [id])
