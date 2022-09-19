@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import img from '../image/logo2.png'
 
 const Navbar = ({ authenticated, user, handleSignOut }) => {
   let signedIn

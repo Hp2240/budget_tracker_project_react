@@ -1,15 +1,12 @@
 import './styles/App.css'
 import { Route, Routes } from 'react-router'
 import { useEffect, useState } from 'react'
-import { checkSession } from './services/Auth'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import { CheckSession } from './services/Auth'
 import SignIn from './pages/SignIn'
 import MyAccount from './pages/MyAccount'
-import img from './image/logo2.png'
-import { Link } from 'react-router-dom'
 import Transaction from './pages/Transaction'
 
 function App() {
