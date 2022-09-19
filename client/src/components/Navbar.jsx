@@ -26,9 +26,6 @@ const Navbar = ({ authenticated, user, handleSignOut }) => {
         <img className="logo" src={img} width="100" height="50"/>
       </Link>
       <div className="nav">
-        <input type="checkbox" />
-        <span></span>
-        <span></span>
         <div className="menu">
           {authenticated && user ? signedIn : notSignedIn}
         </div>

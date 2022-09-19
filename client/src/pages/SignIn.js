@@ -40,7 +40,7 @@ const SignIn = (props) => {
   }, [userFound])
   return (
     <div className="sign-in">
-      <h4>Sign in</h4>
+      <h2>Login</h2>
       <form className="user-container" onSubmit={handleSubmit}>
         <div className="input-box">
           <input
