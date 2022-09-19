@@ -7,30 +7,28 @@ const Navbar = ({ authenticated, user, handleSignOut }) => {
     signedIn = (
       <nav>
         {/* <h5>Welcome {user.email}!</h5> */}
-        <li><Link to="/accounts/:id">My Account</Link></li>
-        <li><Link onClick={handleSignOut} to="/">Sign Out</Link></li>
+        <Link to="/accounts/:id">My Account</Link>
+        <Link onClick={handleSignOut} to="/">Sign Out</Link>
       </nav>
     )
   }
 
   let notSignedIn = (
     <nav>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/signup">Sign Up</Link></li>
-      <li><Link to="/signin">Sign In</Link></li>
+      <Link to="/">Home</Link>
+      <Link to="/signup">Sign Up</Link>
+      <Link to="/signin">Sign In</Link>
     </nav>
   )
   return (
-    <div>
+    <header>
       <Link to="/">
-        <img className="logo" src={img} width="100" height="50"/>
-      </Link>
-      <div className="nav">
-        <div className="menu">
-          {authenticated && user ? signedIn : notSignedIn}
+        <div className="logo-wrapper" alt="logo">
+          <image src={img} />
         </div>
-      </div>
-    </div>
+      </Link>
+      {authenticated && user ? signedIn : notSignedIn}
+    </header>
   )
 }
 
