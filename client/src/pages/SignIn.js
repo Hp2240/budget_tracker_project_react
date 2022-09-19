@@ -11,8 +11,6 @@ const SignIn = (props) => {
 
   let navigate = useNavigate()
 
-  // let { id } = useParams()
-
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
@@ -27,14 +25,11 @@ const SignIn = (props) => {
     props.setUser(payload)
     props.toggleAuthenticated(true)
     setUserFound(true)
-    // setUserId(props.user.id)
-    // console.log(userId, 'this is userId state')
   }
 
   useEffect(() => {
     if (userFound) {
       let id = props.user.id
-      console.log(id)
       navigate(`/accounts/${id}`)
     }
   }, [userFound])

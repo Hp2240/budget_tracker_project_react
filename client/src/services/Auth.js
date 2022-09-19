@@ -27,7 +27,6 @@ export const SignUpUser = async (data) => {
 export const CheckSession = async () => {
   try {
     const res = await Client.get('/api/auth/session')
-    console.log('this is the frontend check session', res)
     return res.data.token
   } catch (error) {
     throw error

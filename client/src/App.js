@@ -42,8 +42,6 @@ function App() {
     }
   }, [])
 
-  console.log(user.id, 'this is user id')
-
   return (
     <div className="App">
       <Navbar
