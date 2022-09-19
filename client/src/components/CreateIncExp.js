@@ -4,7 +4,7 @@ import Client from '../services/api'
 const CreateAccount = ({ accountId }) => {
   const [newIncExp, setNewIncExp] = useState({
     type: '',
-    tansactionNumber: NaN,
+    transactionNumber: NaN,
     amount: '',
     accountId: accountId
   })
@@ -21,7 +21,7 @@ const CreateAccount = ({ accountId }) => {
     console.log(transactionNum)
     await Client.post('/api/transactions/', {
       type: newIncExp.type,
-      tansactionNumber: transactionNum,
+      transactionNumber: transactionNum,
       amount: newIncExp.amount,
       accountId: accountId
     })
@@ -41,7 +41,7 @@ const CreateAccount = ({ accountId }) => {
     <div className="container">
       <form className="incExp" onSubmit={handleSubmit}>
         <select name="type" id="type" onChange={handleChange}>
-          <option>select type</option>
+          <option disabled>select type</option>
           <option name="expense" id="type">
             expense
           </option>
