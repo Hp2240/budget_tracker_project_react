@@ -40,14 +40,32 @@ const Transaction = () => {
       return (
         <li className="minus" key={transaction.id}>
           -${transaction.amount}
-          <button className="delete-btn">x</button>
+          <button
+            className="delete-btn"
+            onClick={async () => {
+              const deleteTransaction = parseInt(transaction.id)
+              await Client.delete(`/api/transactions/${deleteTransaction}`)
+              document.location.reload()
+            }}
+          >
+            x
+          </button>
         </li>
       )
     } else {
       return (
         <li className="plus" key={transaction.id}>
           +${transaction.amount}
-          <button className="delete-btn">x</button>
+          <button
+            className="delete-btn"
+            onClick={async () => {
+              const deleteTransaction = parseInt(transaction.id)
+              await Client.delete(`/api/transactions/${deleteTransaction}`)
+              document.location.reload()
+            }}
+          >
+            x
+          </button>
         </li>
       )
     }
