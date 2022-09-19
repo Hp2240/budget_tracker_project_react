@@ -58,7 +58,7 @@ const CreateAccount = ({ accountId }) => {
           id="amount"
         />
         <label htmlFor="amount">Amount</label>
-        <button>Add</button>
+        <button className="form-button">Add</button>
       </form>
     </div>
   )

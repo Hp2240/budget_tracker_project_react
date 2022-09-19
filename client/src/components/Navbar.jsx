@@ -6,7 +6,6 @@ const Navbar = ({ authenticated, user, handleSignOut }) => {
   if (user) {
     signedIn = (
       <nav>
-        {/* <h5>Welcome {user.email}!</h5> */}
         <Link to="/accounts/:id">My Account</Link>
         <Link onClick={handleSignOut} to="/">Sign Out</Link>
       </nav>
@@ -22,11 +21,6 @@ const Navbar = ({ authenticated, user, handleSignOut }) => {
   )
   return (
     <header>
-      <Link to="/">
-        <div className="logo-wrapper" alt="logo">
-          <image src={img} />
-        </div>
-      </Link>
       {authenticated && user ? signedIn : notSignedIn}
     </header>
   )
